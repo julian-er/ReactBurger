@@ -83,6 +83,14 @@ modalCloseHandler = () => {
     this.setState({purchasing : false})
 }
 
+purchaseCancelHandler = () => {
+    this.setState({purchasing:false})
+}
+
+purchaseContinueHandler = () => {
+    alert ('Estas comprando')
+}
+
     render() {
 
         //i agree this for disable button when i don't have nothing to substract and
@@ -99,7 +107,12 @@ modalCloseHandler = () => {
         return (
             <Aux>
                 <Modal show={this.state.purchasing} clicked={this.modalCloseHandler}>
-                    <OrderSumary ingredients={this.state.ingredients}/>
+                    <OrderSumary 
+                    ingredients={this.state.ingredients} 
+                    continue={this.purchaseContinueHandler} 
+                    cancel={this.purchaseCancelHandler} 
+                    total={this.state.totalPrice}
+                    />
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BurgerControls
