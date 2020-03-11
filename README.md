@@ -1,18 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## React : Construye tu Hamburguesa/Burger Builder
 
-## Available Scripts
+**Spa.**
 
-In the project directory, you can run:
+En el proyecto, tú puedes construir tu propia hamburguesa añadiendo los ingredientes que desees!
+Seleccionando entre : lechuga, bacon, queso y carne.
 
-### `npm start`
+Durante la construcción de este proyecto fui adquiriendo conocimientos básicos y avanzados de React.js , sus ciclos de vida, componentes de clase y funcionales, la utilización del estado y la reutilización de todos los componentes.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Para la comprensión total de algunos de estos conceptos de la librería y la utilización de otra libreria para obtener o enviar datos (axios) cree algunos proyectos adicionales que ayudaron a fijar estos conceptos.
+Los mismos pueden ser observados en mi perfil de github.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Además en el camino integré la realtime database de Firebase.
 
-### `npm test`
+
+**Eng.**
+
+In the project, you can build your burger, adding your custom ingredients.
+Selectable from: salad, bacon, meat, and cheese.
+
+During the construction of this project, I acquired basic and advanced knowledge of React.js, its life cycles, class and functional components, the use of the state and the reuse of all the components.
+
+To fully understand some of these library concepts and use another library to get or send data (Axios) create some additional projects that helped fix these concepts.
+They can be seen on my GitHub profile.
+
+Also on the way, I integrated the realtime database of Firebase.
+
+
+
+### `Proyectos secundarios/ Side projects`
+
+
+
+### `Firebase (realtime database)`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
