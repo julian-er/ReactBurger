@@ -4,6 +4,10 @@ import Burger from '../Components/Burger/Burger'
 import BurgerControls from '../Components/Burger/BuildControls'
 import Modal from '../Components/UI/Modal'
 import OrderSumary from '../Components/OrderSummary'
+import axios from '../Axios-orders'
+import Spinner from '../Components/UI/Spinner'
+import WhitErrorHandler from '../hoc/WhitErrorHandler'
+
 
 
 const INGREDIENT_PRICES = {
@@ -15,16 +19,31 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients:{
-            Lechuga:0,
-            Bacon:0,
-            Queso:0,
-            Carne:0,
-        },
+        ingredients:null,
         totalPrice: 4,
         purcharsable: false,
         purchasing: false,
+        loading:false,
+        error:false,
     }
+
+
+// for fetching data before the component render the best way is using componentDidMount
+componentDidMount(){
+    axios.get('https://burgerbuilder-815f6.firebaseio.com/ingredients.json')
+        .then(response =>{
+            this.setState({
+                ingredients: response.data
+            })
+        })
+        .catch(err=>{
+            this.setState({
+                error: true
+            })
+        })
+}
+
+
 
 // i need to call this function in add and remove handlers and agree the updated state for 
 // use more recently state
@@ -88,8 +107,39 @@ purchaseCancelHandler = () => {
 }
 
 purchaseContinueHandler = () => {
-    alert ('Estas comprando')
+    this.setState({
+        loading:true,
+    })
+    //alert ('Estas comprando')
+    const order={
+        ingredients:this.state.ingredients,
+        price: this.state.totalPrice,
+        costumer:{
+            name: 'Julian',
+            address: {
+                street: 'pueyrredon',
+                zipCode: '2000',
+                country: 'Argentina'
+            },
+            deliveryMethod:'fastest',
+        }
+    }
+    axios.post('/orders.json', order)
+    .then(response => {
+        this.setState({
+            loading:false,
+            purchasing:false,
+        })
+        })
+    .catch(err => {
+        this.setState({
+            loading:false,
+            purchasing:false,
+        })
+        console.log(err)})
 }
+
+
 
     render() {
 
@@ -102,18 +152,18 @@ purchaseContinueHandler = () => {
             disabledInfo[key] = disabledInfo[key] <=0
         }
 
+        // for this action to be displayed, I have to update "shouldComponentUpdate" in modal.js
+        // because we stay updated modal only when props.show change
+        // i use this variable for display the spinner or modal when it's necesary
 
+        let orderSumary=null
 
-        return (
-            <Aux>
-                <Modal show={this.state.purchasing} clicked={this.modalCloseHandler}>
-                    <OrderSumary 
-                    ingredients={this.state.ingredients} 
-                    continue={this.purchaseContinueHandler} 
-                    cancel={this.purchaseCancelHandler} 
-                    total={this.state.totalPrice}
-                    />
-                </Modal>
+        // Show spinner or burguer when the ingredients stay load
+
+        let hamburguer=this.state.error?<p>Ingedients can't be loaded</p> : <Spinner />;
+
+        if (this.state.ingredients){
+            hamburguer=(<Aux>
                 <Burger ingredients={this.state.ingredients} />
                 <BurgerControls
                 ingredientsAdd={this.addIngredientHandler}
@@ -123,10 +173,29 @@ purchaseContinueHandler = () => {
                 price = {this.state.totalPrice}
                 ordered={this.purchaseHandler}
                 />
+            </Aux>);
+            orderSumary=<OrderSumary 
+            ingredients={this.state.ingredients} 
+            continue={this.purchaseContinueHandler} 
+            cancel={this.purchaseCancelHandler} 
+            total={this.state.totalPrice}
+            />;
+        }
+        
+        if (this.state.loading){
+            orderSumary=<Spinner />
+        }
+
+        return (
+            <Aux>
+                <Modal show={this.state.purchasing} clicked={this.modalCloseHandler}>
+                    {orderSumary}
+                </Modal>
+                {hamburguer}
             </Aux>
         );
     }
 }
 
 
-export default BurgerBuilder;
+export default WhitErrorHandler(BurgerBuilder, axios);
