@@ -5,10 +5,10 @@ import BuildControl from './BuildControl'
 
 // i added into an array all options of buttons and after mapping that for obtain that buttons
 const controls = [
-    {label: 'Lechuga', type: 'salad'},
-    {label: 'Bacon', type: 'bacon'},
-    {label: 'Queso', type: 'cheese'},
-    {label: 'Carne', type: 'meat'},
+    {label: 'Lechuga', type: 'Lechuga'},
+    {label: 'Bacon', type: 'Bacon'},
+    {label: 'Queso', type: 'Queso'},
+    {label: 'Carne', type: 'Carne'},
 ]
 
 

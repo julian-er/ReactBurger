@@ -20,16 +20,16 @@ render (){
                         </div>
                     );
                     break;
-                case ('meat'):
+                case ('Carne'):
                     ingredient = <div className={classes.Meat}></div>;
                     break;
-                case ('cheese'):
+                case ('Queso'):
                     ingredient = <div className={classes.Cheese}></div>;
                     break;
-                case ('salad'):
+                case ('Lechuga'):
                     ingredient = <div className={classes.Salad}></div>;
                     break;
-                case ('bacon'):
+                case ('Bacon'):
                     ingredient = <div className={classes.Bacon}></div>;
                     break;
                 default:

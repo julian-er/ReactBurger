@@ -12,7 +12,7 @@ class Modal extends Component {
     // componentWillUpdate(){
     //     console.log('modal will update')
     // }
-    //thas no necesari it's only for check
+    //thas no necesary it's only for check
 
     render() {
         return (
