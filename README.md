@@ -35,7 +35,7 @@ Also on the way, I integrated the realtime database of Firebase.
 
 ### `Firebase (realtime database)`
 
---->>> readme en desarrollo.
+--->>> readme en desarrollo
 
 ## Learn More
 
