@@ -49,7 +49,7 @@ const WhitErrorHandler = (WrappedComponent, axios) => {
                 show={this.state.error}
                 clicked={this.erroConfirmHandler}
                 >
-                    {this.state.error?this.state.error.message:null}
+                {this.state.error?this.state.error.message:null}
                 </Modal>
                 <WrappedComponent {...this.props} />
                 </Aux>
