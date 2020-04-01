@@ -9,7 +9,6 @@ import Spinner from '../Components/UI/Spinner'
 import WhitErrorHandler from '../hoc/WhitErrorHandler'
 
 
-
 const INGREDIENT_PRICES = {
     Lechuga : 5,
     Queso : 10,
@@ -107,36 +106,50 @@ purchaseCancelHandler = () => {
 }
 
 purchaseContinueHandler = () => {
-    this.setState({
-        loading:true,
-    })
-    //alert ('Estas comprando')
-    const order={
-        ingredients:this.state.ingredients,
-        price: this.state.totalPrice,
-        costumer:{
-            name: 'Julian',
-            address: {
-                street: 'pueyrredon',
-                zipCode: '2000',
-                country: 'Argentina'
-            },
-            deliveryMethod:'fastest',
-        }
-    }
-    axios.post('/orders.json', order)
-    .then(response => {
-        this.setState({
-            loading:false,
-            purchasing:false,
-        })
-        })
-    .catch(err => {
-        this.setState({
-            loading:false,
-            purchasing:false,
-        })
-        console.log(err)})
+
+    // i coment that because now i went to go to the checkout component
+    
+    
+    // this.setState({
+    //     loading:true,
+    // })
+    // //alert ('Estas comprando')
+    // const order={
+    //     ingredients:this.state.ingredients,
+    //     price: this.state.totalPrice,
+    //     costumer:{
+    //         name: 'Julian',
+    //         address: {
+    //             street: 'pueyrredon',
+    //             zipCode: '2000',
+    //             country: 'Argentina'
+    //         },
+    //         deliveryMethod:'fastest',
+    //     }
+    // }
+    // axios.post('/orders.json', order)
+    // .then(response => {
+    //     this.setState({
+    //         loading:false,
+    //         purchasing:false,
+    //     })
+    //     })
+    // .catch(err => {
+    //     this.setState({
+    //         loading:false,
+    //         purchasing:false,
+    //     })
+    //     console.log(err)})
+
+    const queryParams = []
+    for (let i in this.state.ingredients){
+        queryParams.push(encodeURIComponent(i)+ '=' + encodeURIComponent(this.state.ingredients[i]))
+    };
+    const queryString  =queryParams.join('&');
+    this.props.history.push({
+        pathname:'/checkout',
+        search:'?'+ queryString
+    });
 }
 
 
