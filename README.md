@@ -88,5 +88,7 @@ I also implemented the use of react router and lazy load to load the components 
 
 --->>> readme en desarrollo
 
+Proyecto en pausa -> Basado en React y componentes de clase
+
 ## Learn More
 
